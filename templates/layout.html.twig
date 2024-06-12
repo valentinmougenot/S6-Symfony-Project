@@ -2,45 +2,61 @@
 
 {% block body %}
 <div class="container flex">
-  <aside class="sidebar bg-blue-950 text-white h-screen sticky top-0 left-0 p-2 md:p-4 rounded-r-2xl">
-    <section class="sidebar__section">
-      <nav class="text-xl">
-        <ul>
-          <li>
-            <a 
-            class="p-2 flex gap-2 items-center justify-center md:justify-normal rounded-lg hover:bg-blue-900 transition"
-            href="{{ path('app_event') }}">
-              <i class="fa-solid fa-house"></i>
-              <span class="hidden md:block">Accueil</span>
-            </a>
-          </li>
-          <li>
-            <a 
-            class="p-2 flex gap-2 items-center justify-center md:justify-normal rounded-lg hover:bg-blue-900 transition"
-            href="{{ path('app_event_create') }}">
-              <i class="fa-solid fa-plus"></i>
-              <span class="hidden md:block">Créer un événement</span>
-            </a>
-          </li>
-          <li>
-            <a 
-            class="p-2 flex gap-2 items-center justify-center md:justify-normal rounded-lg hover:bg-blue-900 transition"
-            href="{{ path('app_event_list') }}">
-              <i class="fa-solid fa-list"></i>
-              <span class="hidden md:block">Liste des événements</span>
-            </a>
-          </li>
-          <li>
-            <a 
-            class="p-2 flex gap-2 items-center justify-center md:justify-normal rounded-lg hover:bg-blue-900 transition"
-            href="{{ path('app_event_register') }}">
-              <i class="fa-solid fa-ticket"></i>
-              <span class="hidden md:block">S'inscrire</span>
-            </a>
-          </li>
-        </ul>
-      </nav>
-    </section>
+  <aside class="sidebar bg-blue-950 text-white h-screen sticky top-0 left-0 p-2 md:p-4 rounded-r-2xl flex flex-col justify-between">
+    <nav class="text-xl">
+      <ul>
+        <li>
+          <a 
+          class="p-2 flex gap-2 items-center justify-center md:justify-normal rounded-lg hover:bg-blue-900 transition"
+          href="{{ path('app_event') }}">
+            <i class="fa-solid fa-house"></i>
+            <span class="hidden md:block">Accueil</span>
+          </a>
+        </li>
+        <li>
+          <a 
+          class="p-2 flex gap-2 items-center justify-center md:justify-normal rounded-lg hover:bg-blue-900 transition"
+          href="{{ path('app_event_create') }}">
+            <i class="fa-solid fa-plus"></i>
+            <span class="hidden md:block">Créer un événement</span>
+          </a>
+        </li>
+        <li>
+          <a 
+          class="p-2 flex gap-2 items-center justify-center md:justify-normal rounded-lg hover:bg-blue-900 transition"
+          href="{{ path('app_event_list') }}">
+            <i class="fa-solid fa-list"></i>
+            <span class="hidden md:block">Liste des événements</span>
+          </a>
+        </li>
+        <li>
+          <a 
+          class="p-2 flex gap-2 items-center justify-center md:justify-normal rounded-lg hover:bg-blue-900 transition"
+          href="{{ path('app_event_register') }}">
+            <i class="fa-solid fa-ticket"></i>
+            <span class="hidden md:block">S'inscrire</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <div>
+    <hr/>
+    {% if app.user %}
+      <a 
+      class="p-2 flex gap-2 items-center justify-center md:justify-normal hover:rounded-lg hover:bg-blue-900 transition mt-2"
+      href="{{ path('app_profile') }}">
+        <i class="fa-regular fa-circle-user"></i>
+        <span class="hidden md:block">{{ app.user.firstname }} {{ app.user.lastname }}</span>
+      </a>
+    {% else %}
+      <a 
+      class="p-2 flex gap-2 items-center justify-center md:justify-normal hover:rounded-lg hover:bg-blue-900 transition mt-2"
+      href="{{ path('app_login') }}">
+        <i class="fa-solid fa-right-to-bracket"></i>      
+        <span class="hidden md:block">Se connecter</span>
+      </a>
+    {% endif %}
+    </div>
   </aside>
   <main>
     {% block main %}{% endblock %}
