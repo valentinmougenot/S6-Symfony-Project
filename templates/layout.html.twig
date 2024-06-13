@@ -1,38 +1,38 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<div class="container flex">
-  <aside class="sidebar bg-blue-950 text-white h-screen sticky top-0 left-0 p-2 md:p-4 rounded-r-2xl flex flex-col justify-between">
+<div class="flex">
+  <aside class="sidebar bg-blue-900 text-white h-screen sticky top-0 left-0 p-2 md:p-4 flex flex-col justify-between md:min-w-[17rem]">
     <nav class="text-xl">
       <ul>
         <li>
           <a 
-          class="p-2 flex gap-2 items-center justify-center md:justify-normal rounded-lg hover:bg-blue-900 transition"
-          href="{{ path('app_event') }}">
+          class="p-2 flex gap-2 items-center justify-center md:justify-normal rounded-lg hover:bg-blue-700 transition"
+          href="{{ path('app_event_index') }}">
             <i class="fa-solid fa-house"></i>
             <span class="hidden md:block">Accueil</span>
           </a>
         </li>
         <li>
           <a 
-          class="p-2 flex gap-2 items-center justify-center md:justify-normal rounded-lg hover:bg-blue-900 transition"
-          href="{{ path('app_event_create') }}">
+          class="p-2 flex gap-2 items-center justify-center md:justify-normal rounded-lg hover:bg-blue-700 transition"
+          href="{{ path('app_event_new') }}">
             <i class="fa-solid fa-plus"></i>
             <span class="hidden md:block">Créer un événement</span>
           </a>
         </li>
         <li>
           <a 
-          class="p-2 flex gap-2 items-center justify-center md:justify-normal rounded-lg hover:bg-blue-900 transition"
-          href="{{ path('app_event_list') }}">
+          class="p-2 flex gap-2 items-center justify-center md:justify-normal rounded-lg hover:bg-blue-700 transition"
+          href="{{ path('app_event_index') }}">
             <i class="fa-solid fa-list"></i>
             <span class="hidden md:block">Liste des événements</span>
           </a>
         </li>
         <li>
           <a 
-          class="p-2 flex gap-2 items-center justify-center md:justify-normal rounded-lg hover:bg-blue-900 transition"
-          href="{{ path('app_event_register') }}">
+          class="p-2 flex gap-2 items-center justify-center md:justify-normal rounded-lg hover:bg-blue-700 transition"
+          href="{{ path('app_event_new') }}">
             <i class="fa-solid fa-ticket"></i>
             <span class="hidden md:block">S'inscrire</span>
           </a>
@@ -43,14 +43,14 @@
     <hr/>
     {% if app.user %}
       <a 
-      class="p-2 flex gap-2 items-center justify-center md:justify-normal hover:rounded-lg hover:bg-blue-900 transition mt-2"
+      class="p-2 flex gap-2 items-center justify-center md:justify-normal hover:rounded-lg hover:bg-blue-700 transition mt-2"
       href="{{ path('app_profile') }}">
         <i class="fa-regular fa-circle-user"></i>
         <span class="hidden md:block">{{ app.user.firstname }} {{ app.user.lastname }}</span>
       </a>
     {% else %}
       <a 
-      class="p-2 flex gap-2 items-center justify-center md:justify-normal hover:rounded-lg hover:bg-blue-900 transition mt-2"
+      class="p-2 flex gap-2 items-center justify-center md:justify-normal hover:rounded-lg hover:bg-blue-700 transition mt-2"
       href="{{ path('app_login') }}">
         <i class="fa-solid fa-right-to-bracket"></i>      
         <span class="hidden md:block">Se connecter</span>
@@ -58,7 +58,7 @@
     {% endif %}
     </div>
   </aside>
-  <main>
+  <main class="w-full">
     {% block main %}{% endblock %}
   </main>
 </div>

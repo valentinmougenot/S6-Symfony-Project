@@ -49,7 +49,7 @@ class AppCustomAuthenticator extends AbstractLoginFormAuthenticator
         }
 
         // For example:
-        return new RedirectResponse($this->urlGenerator->generate('app_event'));
+        return new RedirectResponse($this->urlGenerator->generate('app_event_index'));
         throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
     }
 

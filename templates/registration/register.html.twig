@@ -3,18 +3,54 @@
 {% block title %}Inscription{% endblock %}
 
 {% block main %}
-    <h1>Inscription</h1>
+<div class="flex items-center justify-center min-h-screen bg-gray-100 py-12 px-4 sm:px-6 lg:px-8 w-full">
+    {% if app.user %}
+        <div class="mb-3">
+            Vous êtes déjà connecté en tant que {{ app.user.userIdentifier }}. <a class="text-blue-700 hover:underline" href="{{ path('app_logout') }}">Déconnexion</a>
+        </div>
+    {% else %}
+        <div class="max-w-md w-full bg-white p-8 rounded-lg shadow-md">
 
-    {{ form_errors(registrationForm) }}
+            <h1 class="text-2xl font-bold mb-6 text-center">Inscription</h1>
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.firstName) }}
-        {{ form_row(registrationForm.lastName) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword) }}
-        {{ form_row(registrationForm.confirmPassword) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+            {{ form_errors(registrationForm) }}
 
-        <button type="submit" class="btn">S'inscrire</button>
-    {{ form_end(registrationForm) }}
+            {{ form_start(registrationForm, { 'attr': { 'class': 'space-y-6' } }) }}
+                <div class="space-y-4">
+                    <div>
+                        {{ form_label(registrationForm.firstName, null, { 'label_attr': { 'class': 'block text-sm font-medium text-gray-700' } }) }}
+                        {{ form_widget(registrationForm.firstName, { 'attr': { 'class': 'mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm' } }) }}
+                        {{ form_errors(registrationForm.firstName) }}
+                    </div>
+                    <div>
+                        {{ form_label(registrationForm.lastName, null, { 'label_attr': { 'class': 'block text-sm font-medium text-gray-700' } }) }}
+                        {{ form_widget(registrationForm.lastName, { 'attr': { 'class': 'mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm' } }) }}
+                        {{ form_errors(registrationForm.lastName) }}
+                    </div>
+                    <div>
+                        {{ form_label(registrationForm.email, null, { 'label_attr': { 'class': 'block text-sm font-medium text-gray-700' } }) }}
+                        {{ form_widget(registrationForm.email, { 'attr': { 'class': 'mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm' } }) }}
+                        {{ form_errors(registrationForm.email) }}
+                    </div>
+                    <div>
+                        {{ form_label(registrationForm.plainPassword.first, null, { 'label_attr': { 'class': 'block text-sm font-medium text-gray-700' } }) }}
+                        {{ form_widget(registrationForm.plainPassword.first, { 'attr': { 'class': 'mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm' } }) }}
+                        {{ form_errors(registrationForm.plainPassword.first) }}
+                    </div>
+                    <div>
+                        {{ form_label(registrationForm.plainPassword.second, null, { 'label_attr': { 'class': 'block text-sm font-medium text-gray-700' } }) }}
+                        {{ form_widget(registrationForm.plainPassword.second, { 'attr': { 'class': 'mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm' } }) }}
+                        {{ form_errors(registrationForm.plainPassword.second) }}
+                    </div>
+                </div>
+
+                <div class="mt-6">
+                    <button type="submit" class="w-full bg-blue-700 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded">
+                        S'inscrire
+                    </button>
+                </div>
+            {{ form_end(registrationForm) }}
+        </div>
+    {% endif %}
+</div>
 {% endblock %}

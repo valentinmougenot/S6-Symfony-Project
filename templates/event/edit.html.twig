@@ -1,0 +1,23 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Edit Event{% endblock %}
+
+{% block main %}
+    <div class="flex items-center justify-center min-h-screen bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-md w-full bg-white p-8 rounded-lg shadow-md">
+            <h1 class="text-2xl font-bold mb-6 text-center">Edit Event</h1>
+
+            {{ include('event/_form.html.twig', {'button_label': 'Modifier'}) }}
+
+            <div class="my-4 text-center">
+                <a href="{{ path('app_event_index') }}" class="text-indigo-600 hover:text-indigo-900">
+                    Retour à la liste des événements
+                </a>
+            </div>
+
+            {{ include('event/_delete_form.html.twig') }}
+
+
+        </div>
+    </div>
+{% endblock %}

@@ -86,22 +86,19 @@ class SecurityController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid() && $errors->count() === 0) {
             // encode the plain password
-            if ($form->get('plainPassword')->getData() === $form->get('confirmPassword')->getData()) {
-                $user->setPassword(
-                    $userPasswordHasher->hashPassword(
-                        $user,
-                        $form->get('plainPassword')->getData()
-                    )
-                );
-    
-                $entityManager->persist($user);
-                $entityManager->flush();
-    
-                // do anything else you need here, like send an email
-    
-                return $security->login($user, AppCustomAuthenticator::class, 'main');
-            } 
-            $form->get('confirmPassword')->addError(new FormError('Les mots de passe ne correspondent pas'));
+            $user->setPassword(
+                $userPasswordHasher->hashPassword(
+                    $user,
+                    $form->get('plainPassword')->getData()
+                )
+            );
+
+            $entityManager->persist($user);
+            $entityManager->flush();
+
+            // do anything else you need here, like send an email
+
+            return $security->login($user, AppCustomAuthenticator::class, 'main');
         }
 
         return $this->render('security/profile_password.html.twig', [
