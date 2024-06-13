@@ -1,0 +1,17 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Modification du profil{% endblock %}
+
+{% block main %}
+    <h1>Modification du profil</h1>
+
+    {{ form_errors(editForm) }}
+
+    {{ form_start(editForm) }}
+        {{ form_row(editForm.firstName) }}
+        {{ form_row(editForm.lastName) }}
+        {{ form_row(editForm.email) }}
+
+        <button type="submit" class="btn">Modifier</button>
+    {{ form_end(editForm) }}
+{% endblock %}

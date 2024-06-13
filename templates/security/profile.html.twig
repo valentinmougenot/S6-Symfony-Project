@@ -1,0 +1,17 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Profil{% endblock %}
+
+{% block main %}
+    <h1>Profil</h1>
+    <div>
+        <p>Prénom : {{ user.firstName }}</p>
+        <p>Nom : {{ user.lastName }}</p>
+        <p>Email : {{ user.email }}</p>
+    </div>
+    <div style="display: flex;justify-content: space-between;">
+        <a href="{{ path('app_logout') }}">Déconnexion</a>
+        <a href="{{ path('app_profile_edit') }}">Modifier</a>
+        <a href="{{ path('app_profile_password') }}">Modifier son mot de passe</a>
+    </div>
+{% endblock %}
