@@ -26,8 +26,10 @@
                     <td class="px-6 py-4 whitespace-nowrap">{{ event.maxSize }}</td>
                     <td class="px-6 py-4 whitespace-nowrap">{{ event.public ? 'Oui' : 'Non' }}</td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                        {% if event.createdBy == app.user %}
                         <a href="{{ path('app_event_show', {'id': event.id}) }}" class="text-indigo-600 hover:text-indigo-900">show</a>
                         <a href="{{ path('app_event_edit', {'id': event.id}) }}" class="text-indigo-600 hover:text-indigo-900 ml-4">edit</a>
+                        {% endif %}
                     </td>
                 </tr>
             {% else %}
