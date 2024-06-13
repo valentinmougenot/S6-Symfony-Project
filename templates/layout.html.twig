@@ -1,8 +1,8 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<div class="container flex">
-  <aside class="sidebar bg-blue-950 text-white h-screen sticky top-0 left-0 p-2 md:p-4 rounded-r-2xl">
+<div class="flex">
+  <aside class="sidebar bg-blue-950 text-white h-screen sticky top-0 left-0 p-2 md:p-4 rounded-r-2xl md:min-w-[17rem]">
     <section class="sidebar__section">
       <nav class="text-xl">
         <ul>
@@ -42,7 +42,7 @@
       </nav>
     </section>
   </aside>
-  <main>
+  <main class="w-full">
     {% block main %}{% endblock %}
   </main>
 </div>

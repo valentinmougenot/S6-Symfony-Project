@@ -3,18 +3,24 @@
 {% block title %}Inscription{% endblock %}
 
 {% block main %}
-    <h1>Inscription</h1>
+    {% if app.user %}
+        <div class="mb-3">
+            Vous êtes déjà connecté en tant que {{ app.user.userIdentifier }}. <a class="text-blue-700 hover:underline" href="{{ path('app_logout') }}">Déconnexion</a>
+        </div>
+    {% else %}
+        <h1>Inscription</h1>
 
-    {{ form_errors(registrationForm) }}
+        {{ form_errors(registrationForm) }}
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.firstName) }}
-        {{ form_row(registrationForm.lastName) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword) }}
-        {{ form_row(registrationForm.confirmPassword) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+        {{ form_start(registrationForm) }}
+            {{ form_row(registrationForm.firstName) }}
+            {{ form_row(registrationForm.lastName) }}
+            {{ form_row(registrationForm.email) }}
+            {{ form_row(registrationForm.plainPassword) }}
+            {{ form_row(registrationForm.confirmPassword) }}
+            {{ form_row(registrationForm.agreeTerms) }}
 
-        <button type="submit" class="btn">S'inscrire</button>
-    {{ form_end(registrationForm) }}
+            <button type="submit" class="btn">S'inscrire</button>
+        {{ form_end(registrationForm) }}
+    {% endif %}
 {% endblock %}
