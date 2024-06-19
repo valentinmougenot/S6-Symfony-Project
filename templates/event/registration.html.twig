@@ -1,0 +1,36 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}S'inscrire à des événements{% endblock %}
+
+{% block main %}
+    <h1 class="text-2xl font-bold mb-6">S'inscrire à des événements</h1>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {% for event in events %}
+            <div class="bg-white border border-gray-200 p-4 rounded">
+                <h2 class="text-xl font-bold">{{ event.title }}</h2>
+                <p>{{ event.description }}</p>
+                <p>Date: {{ event.date|date('Y-m-d H:i') }}</p>
+                <p>Places restantes: {{ event.getRemainingPlaces() }}</p>
+
+                {% if event.getRemainingPlaces() > 0 %}
+                    {% if event.id in registeredEventIds %}
+                        <form method="post" action="{{ path('app_event_unregister', {id: event.id}) }}">
+                            <button type="submit" class="bg-red-700 hover:bg-red-900 text-white font-bold py-2 px-4 rounded mt-4">
+                                Se désinscrire
+                            </button>
+                        </form>
+                    {% else %}
+                        <form method="post" action="{{ path('app_event_register', {id: event.id}) }}">
+                            <button type="submit" class="bg-blue-700 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded mt-4">
+                                S'inscrire
+                            </button>
+                        </form>
+                    {% endif %}
+                {% else %}
+                    <p class="text-red-500">Complet</p>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

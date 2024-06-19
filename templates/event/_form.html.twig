@@ -1,11 +1,15 @@
 {{ form_start(form, { 'attr': { 'class': 'space-y-6' } }) }}
     <div class="space-y-4">
         {% for field in form %}
-            <div class="form-group">
-                {{ form_label(field, null, { 'label_attr': { 'class': 'block text-sm font-medium text-gray-700' } }) }}
+            {% if field.vars.name != '_token' %}
+                <div class="form-group">
+                    {{ form_label(field, null, { 'label_attr': { 'class': 'block text-sm font-medium text-gray-700' } }) }}
+                    {{ form_widget(field) }}
+                    {{ form_errors(field) }}
+                </div>
+            {% else %}
                 {{ form_widget(field) }}
-                {{ form_errors(field) }}
-            </div>
+            {% endif %}
         {% endfor %}
     </div>
     <button class="w-full bg-blue-700 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded">
