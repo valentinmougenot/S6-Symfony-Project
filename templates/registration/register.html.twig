@@ -13,36 +13,39 @@
 
             <h1 class="text-2xl font-bold mb-6 text-center">Inscription</h1>
 
-            {{ form_errors(registrationForm) }}
-
             {{ form_start(registrationForm, { 'attr': { 'class': 'space-y-6' } }) }}
                 <div class="space-y-4">
                     <div>
                         {{ form_label(registrationForm.firstName, null, { 'label_attr': { 'class': 'block text-sm font-medium text-gray-700' } }) }}
                         {{ form_widget(registrationForm.firstName, { 'attr': { 'class': 'mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm' } }) }}
-                        {{ form_errors(registrationForm.firstName) }}
                     </div>
                     <div>
                         {{ form_label(registrationForm.lastName, null, { 'label_attr': { 'class': 'block text-sm font-medium text-gray-700' } }) }}
                         {{ form_widget(registrationForm.lastName, { 'attr': { 'class': 'mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm' } }) }}
-                        {{ form_errors(registrationForm.lastName) }}
                     </div>
                     <div>
                         {{ form_label(registrationForm.email, null, { 'label_attr': { 'class': 'block text-sm font-medium text-gray-700' } }) }}
                         {{ form_widget(registrationForm.email, { 'attr': { 'class': 'mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm' } }) }}
-                        {{ form_errors(registrationForm.email) }}
                     </div>
                     <div>
                         {{ form_label(registrationForm.plainPassword.first, null, { 'label_attr': { 'class': 'block text-sm font-medium text-gray-700' } }) }}
                         {{ form_widget(registrationForm.plainPassword.first, { 'attr': { 'class': 'mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm' } }) }}
-                        {{ form_errors(registrationForm.plainPassword.first) }}
                     </div>
                     <div>
                         {{ form_label(registrationForm.plainPassword.second, null, { 'label_attr': { 'class': 'block text-sm font-medium text-gray-700' } }) }}
                         {{ form_widget(registrationForm.plainPassword.second, { 'attr': { 'class': 'mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm' } }) }}
-                        {{ form_errors(registrationForm.plainPassword.second) }}
                     </div>
                 </div>
+                
+                {% if errorCount > 0 %}
+                    <div class="alert-danger">
+                    {{ form_errors(registrationForm.firstName) }}
+                    {{ form_errors(registrationForm.lastName) }}
+                    {{ form_errors(registrationForm.email) }}
+                    {{ form_errors(registrationForm.plainPassword.first) }}
+                    {{ form_errors(registrationForm.plainPassword.second) }}
+                    </div>
+                {% endif %} 
 
                 <div class="mt-6">
                     <button type="submit" class="w-full bg-blue-700 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded">

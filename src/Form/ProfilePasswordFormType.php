@@ -21,8 +21,8 @@ class ProfilePasswordFormType extends AbstractType
                 'type' => PasswordType::class,
                 'mapped' => false,
                 'attr' => ['autocomplete' => 'new-password'],
-                'first_options' => ['label' => 'Mot de passe'],
-                'second_options' => ['label' => 'Confirmer le mot de passe'],
+                'first_options' => ['label' => 'Nouveau mot de passe'],
+                'second_options' => ['label' => 'Confirmer le nouveau mot de passe'],
                 'invalid_message' => 'Les mots de passe doivent correspondre.',
                 'constraints' => [
                     // Mot de passe non vide d'au moins 8 caractères, incluant chiffres et lettres
@@ -39,7 +39,6 @@ class ProfilePasswordFormType extends AbstractType
     {
         $resolver->setDefaults([
             // Configure your form options here
-            'data_class' => User::class,
         ]);
     }
 }
