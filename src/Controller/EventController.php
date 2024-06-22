@@ -93,7 +93,9 @@ class EventController extends AbstractController
     {
         $form = $this->createForm(EventFilterType::class);
         $allValues = $request->query->all();
-        $form->submit($allValues[$form->getName()]);
+        if (isset($allValues[$form->getName()])) {
+            $form->submit($allValues[$form->getName()]);
+        }
 
         $queryBuilder = $eventRepository->createQueryBuilder('e');
 
