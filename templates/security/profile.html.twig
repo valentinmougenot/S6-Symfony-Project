@@ -1,0 +1,36 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Profil{% endblock %}
+
+{% block main %}
+<div class="flex items-center justify-center min-h-screen bg-gray-100 py-12 px-4 sm:px-6 lg:px-8 w-full">
+    <div class="max-w-md w-full bg-white p-8 rounded-lg shadow-md">
+
+        <h1 class="text-2xl font-bold mb-6 text-center">Profil</h1>
+
+        <div class="space-y-4">
+            <div>
+                <p class="text-sm font-medium text-gray-700">Prénom : <span class="mt-1 text-gray-900">{{ user.firstName }}</span></p>
+            </div>
+            <div>
+                <p class="text-sm font-medium text-gray-700">Nom : <span class="mt-1 text-gray-900">{{ user.lastName }}</span></p>
+            </div>
+            <div>
+                <p class="text-sm font-medium text-gray-700">Email : <span class="mt-1 text-gray-900">{{ user.email }}</span></p>
+            </div>
+        </div>
+
+        <div class="mt-6 flex flex-col gap-2 items-center">
+            <a href="{{ path('app_profile_password') }}" class="w-full bg-none text-blue-700 hover:text-blue-900 font-bold py-2 px-4 rounded text-center">
+                Modifier son mot de passe
+            </a>
+            <a href="{{ path('app_profile_edit') }}" class="w-full bg-blue-700 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded text-center">
+                Modifier
+            </a>
+            <a href="{{ path('app_logout') }}" class="w-full bg-red-700 hover:bg-red-900 text-white font-bold py-2 px-4 rounded text-center">
+                Déconnexion
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}
