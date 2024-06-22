@@ -14,6 +14,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+use App\Entity\User;
 
 #[Route('/event')]
 class EventController extends AbstractController
@@ -158,29 +162,61 @@ class EventController extends AbstractController
     }
 
     #[Route('/event/{id}/register', name: 'app_event_register', methods: ['POST'])]
-    public function register(Event $event, RegistrationService $registrationService): Response
+    public function register(Event $event, RegistrationService $registrationService, MailerInterface $mailer): Response
     {
+        /** @var User $user */
         $user = $this->getUser();
         $success = $registrationService->register($event, $user);
+        $subject = 'Inscription réussie !';
+        $template = 'emails/inscription_success.html.twig';
         if ($success) {
             $this->addFlash('success', 'Vous êtes inscrit à l\'événement.');
         } else {
             $this->addFlash('error', 'L\'inscription a échoué.');
+            $subject = 'Inscription échouée';
+            $template = 'emails/inscription_failed.html.twig';
         }
+        $email = (new TemplatedEmail())
+            ->from('projet-s6-symfony@mailer.com')
+            ->to($user->getEmail())
+            ->subject($subject)
+            ->htmlTemplate($template)
+            ->locale('fr')
+            ->context([
+                'event' => $event,
+                'user' => $user,
+            ]);
+        $mailer->send($email);
 
         return $this->redirectToRoute('app_event_registration');
     }
 
     #[Route('/event/{id}/unregister', name: 'app_event_unregister', methods: ['POST'])]
-    public function unregister(Event $event, RegistrationService $registrationService): Response
+    public function unregister(Event $event, RegistrationService $registrationService, MailerInterface $mailer): Response
     {
+        /** @var User $user */
         $user = $this->getUser();
         $success = $registrationService->unregister($event, $user);
+        $subject = 'Désinscription réussie';
+        $template = 'emails/annulation_success.html.twig';
         if ($success) {
             $this->addFlash('success', 'Vous êtes désinscrit de l\'événement.');
         } else {
             $this->addFlash('error', 'La désinscription a échoué.');
+            $subject = 'Désinscription échouée';
+            $template = 'emails/annulation_failed.html.twig';
         }
+        $email = (new TemplatedEmail())
+            ->from('projet-s6-symfony@mailer.com')
+            ->to($user->getEmail())
+            ->subject($subject)
+            ->htmlTemplate($template)
+            ->locale('fr')
+            ->context([
+                'event' => $event,
+                'user' => $user,
+            ]);
+        $mailer->send($email);
 
         return $this->redirectToRoute('app_event_registration');
     }
