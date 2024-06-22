@@ -13,22 +13,22 @@
                 <p>Date: {{ event.date|date('Y-m-d H:i') }}</p>
                 <p>Places restantes: {{ event.getRemainingPlaces() }}</p>
 
-                {% if event.getRemainingPlaces() > 0 %}
-                    {% if event.id in registeredEventIds %}
-                        <form method="post" action="{{ path('app_event_unregister', {id: event.id}) }}">
-                            <button type="submit" class="bg-red-700 hover:bg-red-900 text-white font-bold py-2 px-4 rounded mt-4">
-                                Se désinscrire
-                            </button>
-                        </form>
-                    {% else %}
+                {% if event.id in registeredEventIds %}
+                    <form method="post" action="{{ path('app_event_unregister', {id: event.id}) }}">
+                        <button type="submit" class="bg-red-700 hover:bg-red-900 text-white font-bold py-2 px-4 rounded mt-4">
+                            Se désinscrire
+                        </button>
+                    </form>
+                {% else %}
+                    {% if event.getRemainingPlaces() > 0 %}
                         <form method="post" action="{{ path('app_event_register', {id: event.id}) }}">
                             <button type="submit" class="bg-blue-700 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded mt-4">
                                 S'inscrire
                             </button>
                         </form>
+                    {% else %}
+                        <p class="text-red-500">Complet</p>
                     {% endif %}
-                {% else %}
-                    <p class="text-red-500">Complet</p>
                 {% endif %}
             </div>
         {% endfor %}

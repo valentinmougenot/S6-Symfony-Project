@@ -92,13 +92,13 @@ class EventController extends AbstractController
     public function list(EventRepository $eventRepository, PaginatorInterface $paginator, Request $request): Response
     {
         $form = $this->createForm(EventFilterType::class);
-        $form->handleRequest($request);
+        $allValues = $request->query->all();
+        $form->submit($allValues[$form->getName()]);
 
         $queryBuilder = $eventRepository->createQueryBuilder('e');
 
-        if (true) {
-            $filters = $request->query->get('event_filter');
-            dump($filters); // Debug the form data (see the Symfony Profiler > Debug toolbar > Forms
+        if ($form->isSubmitted() && $form->isValid()) {
+            $filters = $form->getData();
 
             if ($filters && $filters['title']) {
                 $queryBuilder->andWhere('e.title LIKE :title')
@@ -116,14 +116,14 @@ class EventController extends AbstractController
             }
 
             if (isset($filters['is_public']) && $filters['is_public'] !== null) {
-                $queryBuilder->andWhere('e.isPublic = :is_public')
-                             ->setParameter('is_public', $filters['is_public']);
+                $queryBuilder->andWhere('e.public = :public')
+                             ->setParameter('public', $filters['is_public']);
             }
         }
 
         if (!$this->getUser()) {
-            $queryBuilder->andWhere('e.isPublic = :isPublic')
-                         ->setParameter('isPublic', true);
+            $queryBuilder->andWhere('e.public = :public')
+                         ->setParameter('public', true);
         }
 
         $pagination = $paginator->paginate(
