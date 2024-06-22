@@ -1,11 +1,23 @@
 {% extends 'layout.html.twig' %}
 
-{% block title %}Mes événements{% endblock %}
+{% block title %}Liste des événements{% endblock %}
 
 {% block main %}
-    <h1 class="text-2xl font-bold mb-6">Mes événements</h1>
+    <h1 class="text-2xl font-bold mb-6">Liste des événements</h1>
 
-    <div class="overflow-x-auto">
+    {{ form_start(form, { 'method': 'GET', 'attr': { 'class': 'space-y-4' } }) }}
+        <div class="flex gap-4">
+            {{ form_row(form.title) }}
+            {{ form_row(form.date_from) }}
+            {{ form_row(form.date_to) }}
+            {{ form_row(form.is_public) }}
+        </div>
+        <button type="submit" class="bg-blue-700 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded mt-4">
+            Filtrer
+        </button>
+    {{ form_end(form) }}
+
+    <div class="overflow-x-auto mt-6">
         <table class="min-w-full bg-white border border-gray-200 divide-y divide-gray-200">
             <thead class="bg-gray-50">
                 <tr>
@@ -18,11 +30,11 @@
                 </tr>
             </thead>
             <tbody class="bg-white divide-y divide-gray-200">
-            {% for event in events %}
+            {% for event in pagination %}
                 <tr>
                     <td class="px-6 py-4 whitespace-nowrap">{{ event.title }}</td>
                     <td class="px-6 py-4 whitespace-nowrap">{{ event.description }}</td>
-                    <td class="px-6 py-4 whitespace-nowrap">{{ event.date ? event.date|date('Y-m-d H:i:s') : '' }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap">{{ event.date|date('Y-m-d H:i:s') }}</td>
                     <td class="px-6 py-4 whitespace-nowrap">{{ event.maxSize }}</td>
                     <td class="px-6 py-4 whitespace-nowrap">{{ event.public ? 'Oui' : 'Non' }}</td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium flex gap-4">
@@ -39,11 +51,14 @@
                 </tr>
             {% else %}
                 <tr>
-                    <td colspan="6" class="px-6 py-4 whitespace-nowrap text-center text-gray-500">Vous n'avez pas encore créé d'événement</td>
+                    <td colspan="6" class="px-6 py-4 whitespace-nowrap text-center text-gray-500">Aucun événement trouvé</td>
                 </tr>
             {% endfor %}
             </tbody>
         </table>
+    </div>
+    <div class="mt-4">
+        {{ knp_pagination_render(pagination) }}
     </div>
 
     <div class="mt-4">

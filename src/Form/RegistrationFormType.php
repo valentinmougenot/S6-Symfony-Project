@@ -25,11 +25,11 @@ class RegistrationFormType extends AbstractType
                 'label' => 'Nom',
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Veuillez entrer un nom',
+                        'message' => 'Veuillez entrer un nom.',
                     ]),
                     new Length([
                         'max' => 255,
-                        'maxMessage' => 'Votre nom ne peut pas contenir plus de {{ limit }} caractères',
+                        'maxMessage' => 'Votre nom ne peut pas contenir plus de {{ limit }} caractères.',
                     ]),
                 ],
             ])
@@ -37,11 +37,11 @@ class RegistrationFormType extends AbstractType
                 'label' => 'Prénom',
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Veuillez entrer un prénom',
+                        'message' => 'Veuillez entrer un prénom.',
                     ]),
                     new Length([
                         'max' => 255,
-                        'maxMessage' => 'Votre prénom ne peut pas contenir plus de {{ limit }} caractères',
+                        'maxMessage' => 'Votre prénom ne peut pas contenir plus de {{ limit }} caractères.',
                     ]),
                 ],
             ])
@@ -49,16 +49,16 @@ class RegistrationFormType extends AbstractType
                 'help' => 'Votre email ne sera jamais partagé avec des tiers.',
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Veuillez entrer un email',
+                        'message' => 'Veuillez entrer un email.',
                     ]),
                     new Length([
                         'max' => 255,
-                        'maxMessage' => 'Votre email ne peut pas contenir plus de {{ limit }} caractères',
+                        'maxMessage' => 'Votre email ne peut pas contenir plus de {{ limit }} caractères.',
                     ]),
                     new Regex([
                         // pattern pour un email de la forme xxx@yyy.zz
                         'pattern' => '/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/',
-                        'message' => 'Veuillez entrer un email valide',
+                        'message' => 'Veuillez entrer un email valide.',
                     ]),
                     // Regarder que l'email n'existe pas déjà dans la base de données
                 ],
